@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Sidebar from "./sidebar/Sidebar";
+import Navbar from "./sidebar/Navbar";
+import HomePage from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+
+import "./sidebar/Sidebar.css";
 
 function App() {
+  const [collapse, setCollapse] = useState(false);
+  const toggle = () => setCollapse(!collapse);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="wrapper">
+        <Sidebar collapse={collapse} />
+        <div id="content">
+          <Navbar toggle={toggle} />
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route render={() => <h2>404</h2>} />
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 

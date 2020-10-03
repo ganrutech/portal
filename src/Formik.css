@@ -1,0 +1,38 @@
+.App {
+  display: flex;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+label {
+  font-weight: bold;
+  display: flex;
+  margin-bottom: 5px;
+  color: rgb(46, 46, 46);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  display: block;
+  width: 400px;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #fff;
+  background-image: none;
+  color: #555;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+.error {
+  margin: 5px 0px;
+  color: rgb(218, 18, 18);
+}
