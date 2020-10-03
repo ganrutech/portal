@@ -13,7 +13,7 @@ function App() {
   const toggle = () => setCollapse(!collapse);
 
   return (
-    <Router>
+    <Router basename="/portal">
       <div className="wrapper">
         <Sidebar collapse={collapse} />
         <div id="content">
