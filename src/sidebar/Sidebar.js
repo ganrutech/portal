@@ -9,12 +9,8 @@ function Sidebar(props) {
   const [menu, setMenu] = useState(MenuList);
 
   useEffect(() => {
-    // const pathname = props.location.pathname;
-    // document
-    //   .querySelector(`a.active[href='${pathname}']`)
-    //   .closest("div")
-    //   .parentElement.querySelector("a.dropdown-toggle")
-    //   .click();
+    const pathname = props.location.pathname;
+    document.querySelector(`a.dropdown-toggle[href='#${pathname}']`).click();
     // eslint-disable-next-line
   }, []);
 
