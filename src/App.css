@@ -1,0 +1,61 @@
+/* Custom Style - Start */
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+  font-size: 0.815rem !important;
+  font-family: "Poppins", sans-serif;
+  background: #fafafa;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  line-height: 1.7em;
+}
+input,
+select,
+textarea {
+  font-size: 0.815rem !important;
+}
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.page-link:disabled {
+  background: #e4e4e433;
+  cursor: not-allowed;
+}
+
+#sidebar li a.active {
+  border-left: 5px solid #17a2b8;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#sidebar ul li.active ul {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#sidebar ul li svg {
+  margin-right: 10px;
+}
+
+#logo {
+  width: 100%;
+}
+
+.breadcrumb {
+  padding: 10px 5px;
+  margin-bottom: 0.5rem;
+  background: none;
+}
+.nav-link {
+  padding: 0.5rem 10px;
+}
+.breadcrumb-item + .breadcrumb-item:before {
+  content: ">";
+}
+/* Custom Style - End */

@@ -1,9 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 function Dashboard() {
   return (
     <>
-      <h2>Dashboard</h2>
+      <Breadcrumb>
+        <BreadcrumbItem>
+          <Link to="#">Home</Link>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>Dashboard</BreadcrumbItem>
+      </Breadcrumb>
+      <h5>Dashboard</h5>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

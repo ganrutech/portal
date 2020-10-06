@@ -10,7 +10,12 @@ function Sidebar(props) {
 
   useEffect(() => {
     const pathname = props.location.pathname;
-    document.querySelector(`a.dropdown-toggle[href='#${pathname}']`).click();
+    const activeElement = document.querySelector(
+      `a.active[href='#${pathname}']`
+    );
+    if (activeElement.closest("div").classList.contains("collapse")) {
+      document.querySelector(`a.dropdown-toggle[href='#${pathname}']`).click();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -59,7 +64,7 @@ function Sidebar(props) {
               </>
             )}
             {!each.subMenu && (
-              <NavLink to={each.path}>
+              <NavLink to={each.path} onClick={() => handleClick(index)}>
                 {each.icon} {each.nameHeader}
               </NavLink>
             )}

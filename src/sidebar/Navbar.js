@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 import * as FIcons from "react-icons/fa";
-import { UncontrolledCollapse, Button } from "reactstrap";
+import * as BiIcons from "react-icons/bi";
+import * as MdIcons from "react-icons/md";
 
 function Navbar(props) {
   return (
@@ -13,29 +16,18 @@ function Navbar(props) {
         >
           <FIcons.FaAlignLeft />
         </Button>
-        <Button
-          id="navbarSupportedContent"
-          className="btn btn-dark d-inline-block d-lg-none ml-auto"
-        >
-          <FIcons.FaBars />
-        </Button>
-        <UncontrolledCollapse
-          toggler="#navbarSupportedContent"
-          className="navbar-collapse"
-        >
-          <ul className="nav navbar-nav ml-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="!#">
-                Page 1
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="!#">
-                Page 2
-              </a>
-            </li>
-          </ul>
-        </UncontrolledCollapse>
+        <ul className="nav ml-auto">
+          <li className="nav-item active">
+            <Link className="nav-link" to="#">
+              <MdIcons.MdNotificationsActive size="20" />
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="#">
+              <BiIcons.BiLogOut size="20" />
+            </Link>
+          </li>
+        </ul>
       </div>
     </nav>
   );

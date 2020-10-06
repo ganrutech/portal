@@ -1,9 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 
-function Home() {
+function Analytics() {
   return (
     <>
-      <h2>Home</h2>
+      <Breadcrumb>
+        <BreadcrumbItem>
+          <Link to="#">Home</Link>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>Analytics</BreadcrumbItem>
+      </Breadcrumb>
+      <h5>Analytics</h5>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -17,4 +25,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Analytics;

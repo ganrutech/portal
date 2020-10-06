@@ -1,5 +1,4 @@
 import React from "react";
-import * as VsIcons from "react-icons/vsc";
 import * as AIcons from "react-icons/ai";
 
 export const MenuList = [
@@ -8,11 +7,15 @@ export const MenuList = [
     icon: <AIcons.AiFillHome />,
     open: false,
     subMenu: [
-      { path: "/", name: "Home1" },
+      { path: "/", name: "Analytics" },
       { path: "/dashboard", name: "Dashboard" },
     ],
   },
-  { path: "/about", nameHeader: "About", icon: <VsIcons.VscAccount /> },
+  {
+    path: "/customers",
+    nameHeader: "Customers",
+    icon: <AIcons.AiOutlineUsergroupAdd />,
+  },
   {
     nameHeader: "Settings",
     icon: <AIcons.AiFillSetting />,
