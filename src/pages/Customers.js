@@ -5,6 +5,8 @@ import axios from "axios";
 import { useTable, usePagination } from "react-table";
 import * as MdIcons from "react-icons/md";
 
+import Loader from "../images/loader.gif";
+
 const columns = [
   {
     Header: "ID",
@@ -32,6 +34,7 @@ const Table = ({
   columns,
   data,
   fetchData,
+  loading,
   pageCount: controlledPageCount,
 }) => {
   const {
@@ -41,13 +44,11 @@ const Table = ({
     prepareRow,
     page,
     canPreviousPage,
-    canNextPage,
-    pageOptions,
     pageCount,
     gotoPage,
     nextPage,
     previousPage,
-    // setPageSize,
+    setPageSize,
     // Get the state from the instance
     state: { pageIndex, pageSize },
   } = useTable(
@@ -67,52 +68,72 @@ const Table = ({
 
   return (
     <div className="row">
-      <div className="col-md-10 col-6">
-        <ul className="pagination justify-content-start">
-          <li className="page-item">
-            <button
-              className="page-link"
-              onClick={() => previousPage()}
-              disabled={!canPreviousPage}
+      <div className="col-md-12">
+        <div className="d-flex">
+          <div className="p-2 sm-width-50">
+            <select
+              className="form-control"
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+              }}
             >
-              <MdIcons.MdRefresh
-                size={16}
-                onClick={() => gotoPage(0)}
-                disabled={!canPreviousPage}
-              />
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div className="col-md-1 col-3">
-        <select className="form-control">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      </div>
-      <div className="col-md-1 col-3">
-        <ul className="pagination justify-content-end">
-          <li className="page-item">
-            <button
-              className="page-link"
-              onClick={() => previousPage()}
-              disabled={!canPreviousPage}
-            >
-              {"<"}
-            </button>
-          </li>
-          <li className="page-item">
-            <button
-              className="page-link"
-              onClick={() => nextPage()}
-              disabled={!canNextPage}
-            >
-              {">"}
-            </button>
-          </li>
-        </ul>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <div className="p-2 sm-width-50">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              className="form-control"
+              placeholder="Search"
+            />
+          </div>
+          <div className="p-2 ml-auto">
+            <ul className="pagination">
+              <li className="page-item">
+                <button
+                  className="page-link btn-outline-secondary"
+                  onClick={() => previousPage()}
+                  disabled={!canPreviousPage}
+                >
+                  <MdIcons.MdRefresh
+                    size={16}
+                    onClick={() => gotoPage(0)}
+                    disabled={!canPreviousPage}
+                  />
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div className="p-2">
+            <ul className="pagination justify-content-end">
+              <li className="page-item">
+                <button
+                  className="page-link"
+                  onClick={() => previousPage()}
+                  disabled={!canPreviousPage}
+                >
+                  {"<"}
+                </button>
+              </li>
+              <li className="page-item">
+                <button
+                  className="page-link"
+                  onClick={() => nextPage()}
+                  disabled={pageSize > pageCount ? true : false}
+                >
+                  {">"}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div className="col-md-12 col-12">
         <div className="table-responsive">
@@ -132,20 +153,28 @@ const Table = ({
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {page.map((row, i) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
+              {!loading &&
+                page.map((row, i) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => {
+                        return (
+                          <td {...cell.getCellProps()}>
+                            {cell.render("Cell")}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
+          {loading && (
+            <div className="text-center">
+              <img src={Loader} className="table-loader" alt="loader" />
+            </div>
+          )}
         </div>
       </div>
       <div className="col-md-12">
@@ -157,11 +186,13 @@ const Table = ({
 
 function Customers() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = React.useState(false);
   const [pageCount, setPageCount] = React.useState(0);
   const fetchIdRef = useRef(0);
 
   const fetchData = useCallback(({ pageSize, pageIndex }) => {
     const fetchId = ++fetchIdRef.current;
+    setLoading(true);
 
     if (fetchId === fetchIdRef.current) {
       //   const startRow = pageSize * pageIndex;
@@ -176,6 +207,7 @@ function Customers() {
           .then((res) => {
             setData(res.data);
             setPageCount(Math.ceil(res.data.length));
+            setLoading(false);
           })
           .catch((err) => {
             console.log(err);
@@ -194,6 +226,7 @@ function Customers() {
           columns={columns}
           data={data}
           fetchData={fetchData}
+          loading={loading}
           pageCount={pageCount}
         />
       </div>

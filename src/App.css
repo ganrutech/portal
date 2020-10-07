@@ -59,3 +59,17 @@ a:focus {
   content: ">";
 }
 /* Custom Style - End */
+
+/* loader */
+.table-loader {
+  width: 25px;
+  height: auto;
+}
+
+/* Media query - Start */
+@media (max-width: 768px) {
+  .sm-width-50 {
+    width: 50%;
+  }
+}
+/* Media query - End */
